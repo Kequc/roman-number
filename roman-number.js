@@ -19,7 +19,10 @@ const DICT = [
 ////
 
 function fromRoman (rom) {
-    return 1;
+    if (rom === '') return 0;
+    for (const obj of DICT) {
+        if (rom.indexOf(obj.rom) === 0) return obj.int + fromRoman(rom.slice(obj.rom.length));
+    }
 }
 
 function toRoman (int) {
@@ -74,7 +77,8 @@ const testCases = [
     { param: 3, int: 3, rom: 'III' },
     { param: 4, int: 4, rom: 'IV' },
     { param: 5, int: 5, rom: 'V'},
-    { param: 'I', int: 1, rom: 'I' }
+    { param: 'I', int: 1, rom: 'I' },
+    { param: 'III', int: 3, rom: 'III' }
 ];
 
 function stdoutRed (message) { console.log('\x1b[31m%s\x1b[0m', message); }
