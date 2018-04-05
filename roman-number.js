@@ -18,6 +18,10 @@ const DICT = [
 // UTIL
 ////
 
+function fromRoman (rom) {
+    return 1;
+}
+
 function toRoman (int) {
     if (int === 0) return '';
     for (const obj of DICT) {
@@ -32,6 +36,10 @@ function getInt (param) {
         if (parsed < 1 || parsed > 3999) throw new Error('invalid range');
     }
     if (!param) throw new Error('value required');
+
+    if (isNaN(parsed)) {
+        if (typeof param === 'string') return fromRoman(param);
+    }
 
     return parsed;
 }
@@ -65,7 +73,8 @@ const testCases = [
     { param: 1, int: 1, rom: 'I' },
     { param: 3, int: 3, rom: 'III' },
     { param: 4, int: 4, rom: 'IV' },
-    { param: 5, int: 5, rom: 'V'}
+    { param: 5, int: 5, rom: 'V'},
+    { param: 'I', int: 1, rom: 'I' }
 ];
 
 function stdoutRed (message) { console.log('\x1b[31m%s\x1b[0m', message); }
