@@ -14,6 +14,8 @@ const DICT = [
     { int: 1, rom: 'I' }
 ];
 
+const VALID_ROM = /^M{0,3}(?:CM|CD|D?C{0,3})(?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3})$/;
+
 ////
 // UTIL
 ////
@@ -40,8 +42,9 @@ function getInt (param) {
     }
     if (!param) throw new Error('value required');
 
-    if (isNaN(parsed)) {
-        if (typeof param === 'string') return fromRoman(param);
+    if (isNaN(parsed) && typeof param === 'string') {
+        if (!VALID_ROM.test(param)) throw new Error('invalid value');
+        return fromRoman(param);
     }
 
     return parsed;
@@ -78,7 +81,8 @@ const testCases = [
     { param: 4, int: 4, rom: 'IV' },
     { param: 5, int: 5, rom: 'V'},
     { param: 'I', int: 1, rom: 'I' },
-    { param: 'III', int: 3, rom: 'III' }
+    { param: 'III', int: 3, rom: 'III' },
+    { param: 'IIII', error: 'invalid value' }
 ];
 
 function stdoutRed (message) { console.log('\x1b[31m%s\x1b[0m', message); }
