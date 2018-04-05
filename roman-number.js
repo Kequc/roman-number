@@ -28,17 +28,26 @@ const testCases = [
 function stdoutRed (message) { console.log('\x1b[31m%s\x1b[0m', message); }
 function stdoutGreen (message) { console.log('\x1b[32m%s\x1b[0m', message); }
 
-for (const testCase of testCases) {
+function buildInstance (param, error) {
     try {
-        new RomanNumber(testCase.param);
-        stdoutRed(`Expected ${testCase.param} to throw '${testCase.error}'`);
+        const instance = new RomanNumber(param);
+        if (error !== undefined) {
+            stdoutRed(`Expected ${param} to throw '${error}'`);
+        }
+        return instance;
     } catch (e) {
-        if (e.message !== testCase.error) {
-            stdoutRed(`Expected ${testCase.param} to throw '${testCase.error}' instead got '${e.message}'`);
+        if (error === undefined) {
+            stdoutRed(`Expected ${param} to not throw an error instead got '${e.message}'`);
+        } else if (e.message !== error) {
+            stdoutRed(`Expected ${param} to throw '${error}' instead got '${e.message}'`);
         } else {
-            stdoutGreen(`Success ${testCase.param} threw '${testCase.error}'`);
+            stdoutGreen(`Success ${param} threw '${error}'`);
         }
     }
+}
+
+for (const testCase of testCases) {
+    buildInstance(testCase.param, testCase.error);
 }
 
 })();
