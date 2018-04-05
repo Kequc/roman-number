@@ -10,15 +10,20 @@ function getInt (param) {
 }
 
 function RomanNumber (param) {
-    getInt(param);
+    this._int = getInt(param);
 }
 
 RomanNumber.prototype.toInt = function () {
-    return 1;
+    return this._int;
 };
 
 RomanNumber.prototype.toString = function () {
-    return 'I';
+    let result = '';
+    while (this._int > 0) {
+        result += 'I';
+        this._int--;
+    }
+    return result;
 };
 
 ////
@@ -31,7 +36,8 @@ const testCases = [
     { param: null, error: 'value required' },
     { param: '', error: 'value required' },
     { param: 0, error: 'invalid range' },
-    { param: 1, int: 1, rom: 'I' }
+    { param: 1, int: 1, rom: 'I' },
+    { param: 3, int: 3, rom: 'III' }
 ];
 
 function stdoutRed (message) { console.log('\x1b[31m%s\x1b[0m', message); }
