@@ -9,7 +9,8 @@ function RomanNumber (param) {
 (function () {
 
 const testCases = [
-    { param: null, error: 'value required' }
+    { param: null, error: 'value required' },
+    { param: '', error: 'value required' }
 ];
 
 function stdoutRed (message) { console.log('\x1b[31m%s\x1b[0m', message); }
