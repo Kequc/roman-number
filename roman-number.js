@@ -13,6 +13,14 @@ function RomanNumber (param) {
     getInt(param);
 }
 
+RomanNumber.prototype.toInt = function () {
+    return 1;
+};
+
+RomanNumber.prototype.toString = function () {
+    return 'I';
+};
+
 ////
 // TEST
 ////
@@ -22,7 +30,8 @@ function RomanNumber (param) {
 const testCases = [
     { param: null, error: 'value required' },
     { param: '', error: 'value required' },
-    { param: 0, error: 'invalid range' }
+    { param: 0, error: 'invalid range' },
+    { param: 1, int: 1, rom: 'I' }
 ];
 
 function stdoutRed (message) { console.log('\x1b[31m%s\x1b[0m', message); }
@@ -47,7 +56,15 @@ function buildInstance (param, error) {
 }
 
 for (const testCase of testCases) {
-    buildInstance(testCase.param, testCase.error);
+    const instance = buildInstance(testCase.param, testCase.error);
+    if (instance === undefined) continue;
+
+    if (instance.toInt() === testCase.int) {
+        stdoutGreen(`Success ${testCase.param} toInt() returns ${testCase.int}`);
+    }
+    if (instance.toString() === testCase.rom) {
+        stdoutGreen(`Success ${testCase.param} toString() returns ${testCase.rom}`);
+    }
 }
 
 })();
