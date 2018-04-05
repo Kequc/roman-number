@@ -55,6 +55,7 @@ function getInt (param) {
 ////
 
 function RomanNumber (param) {
+    if (!(this instanceof RomanNumber)) return new RomanNumber(param);
     this._int = getInt(param);
 }
 
@@ -137,6 +138,13 @@ for (const testCase of testCases) {
     } else {
         stdoutRed(`Expected ${testCase.param} toString() to return ${testCase.rom} instead got ${rom}`);
     }
+}
+
+const newInstance = RomanNumber(1500);
+if (newInstance instanceof RomanNumber && newInstance.toString() === 'MD') {
+    stdoutGreen('Success instance created without using \'new\' operator');
+} else {
+    stdoutRed('Expected instance to be created without using \'new\' operator');
 }
 
 })();
