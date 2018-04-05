@@ -18,6 +18,17 @@ RomanNumber.prototype.toInt = function () {
 };
 
 const DICT = [
+    { int: 1000, rom: 'M' },
+    { int: 900, rom: 'CM' },
+    { int: 500, rom: 'D' },
+    { int: 400, rom: 'CD' },
+    { int: 100, rom: 'C' },
+    { int: 90, rom: 'XC' },
+    { int: 50, rom: 'L' },
+    { int: 40, rom: 'XL' },
+    { int: 10, rom: 'X' },
+    { int: 9, rom: 'IX' },
+    { int: 5, rom: 'V' },
     { int: 4, rom: 'IV' },
     { int: 1, rom: 'I' }
 ];
@@ -45,7 +56,8 @@ const testCases = [
     { param: 0, error: 'invalid range' },
     { param: 1, int: 1, rom: 'I' },
     { param: 3, int: 3, rom: 'III' },
-    { param: 4, int: 4, rom: 'IV' }
+    { param: 4, int: 4, rom: 'IV' },
+    { param: 5, int: 5, rom: 'V'}
 ];
 
 function stdoutRed (message) { console.log('\x1b[31m%s\x1b[0m', message); }
