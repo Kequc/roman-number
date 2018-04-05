@@ -1,4 +1,5 @@
 function RomanNumber (param) {
+    throw new Error('value required');
 }
 
 ////
@@ -18,10 +19,15 @@ for (const testCase of testCases) {
     try {
         new RomanNumber(testCase.param);
         if (testCase.error) {
-            stdoutRed(`Expected "${testCase.param}" to throw "${testCase.error}"`);
+            stdoutRed(`Expected ${testCase.param} to throw '${testCase.error}'`);
             continue;
         }
     } catch (e) {
+        if (e.message !== testCase.error) {
+            stdoutRed(`Expected ${testCase.param} to throw '${testCase.error}' instead got '${e.message}'`);
+        } else {
+            stdoutGreen(`Success ${testCase.param} threw '${testCase.error}'`);
+        }
     }
 }
 
