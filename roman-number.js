@@ -1,22 +1,3 @@
-function getInt (param) {
-    const parsed = parseInt(param, 10);
-
-    if (typeof parsed === 'number') {
-        if (parsed < 1 || parsed > 3999) throw new Error('invalid range');
-    }
-    if (!param) throw new Error('value required');
-
-    return parsed;
-}
-
-function RomanNumber (param) {
-    this._int = getInt(param);
-}
-
-RomanNumber.prototype.toInt = function () {
-    return this._int;
-};
-
 const DICT = [
     { int: 1000, rom: 'M' },
     { int: 900, rom: 'CM' },
@@ -33,12 +14,39 @@ const DICT = [
     { int: 1, rom: 'I' }
 ];
 
+////
+// UTIL
+////
+
 function toRoman (int) {
     if (int === 0) return '';
     for (const obj of DICT) {
         if (int >= obj.int) return obj.rom + toRoman(int - obj.int);
     }
 }
+
+function getInt (param) {
+    const parsed = parseInt(param, 10);
+
+    if (typeof parsed === 'number') {
+        if (parsed < 1 || parsed > 3999) throw new Error('invalid range');
+    }
+    if (!param) throw new Error('value required');
+
+    return parsed;
+}
+
+////
+// LIB
+////
+
+function RomanNumber (param) {
+    this._int = getInt(param);
+}
+
+RomanNumber.prototype.toInt = function () {
+    return this._int;
+};
 
 RomanNumber.prototype.toString = function () {
     return toRoman(this._int);
