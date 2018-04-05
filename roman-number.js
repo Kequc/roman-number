@@ -82,7 +82,21 @@ const testCases = [
     { param: 5, int: 5, rom: 'V'},
     { param: 'I', int: 1, rom: 'I' },
     { param: 'III', int: 3, rom: 'III' },
-    { param: 'IIII', error: 'invalid value' }
+    { param: 'IIII', error: 'invalid value' },
+    { param: 'IV', int: 4, rom: 'IV' },
+    { param: 'V', int: 5, rom: 'V' },
+    { param: 1968, int: 1968, rom: 'MCMLXVIII' },
+    { param: '1473', int: 1473, rom: 'MCDLXXIII' },
+    { param: 2999, int: 2999, rom: 'MMCMXCIX' },
+    { param: 3000, int: 3000, rom: 'MMM' },
+    { param: 10000, error: 'invalid range' },
+    { param: 'CDXXIX', int: 429, rom: 'CDXXIX' },
+    { param: 'CD1X', error: 'invalid value' },
+    { param: 'error', error: 'invalid value' },
+    { param: 'MCDLXXXII', int: 1482, rom: 'MCDLXXXII' },
+    { param: 'MCMLXXX', int: 1980, rom: 'MCMLXXX' },
+    { param: 'MMMMCMXCIX', error: 'invalid value' },
+    { param: 'MMMMDMXCIX', error: 'invalid value' }
 ];
 
 function stdoutRed (message) { console.log('\x1b[31m%s\x1b[0m', message); }
