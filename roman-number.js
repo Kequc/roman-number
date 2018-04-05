@@ -18,10 +18,7 @@ function stdoutGreen (message) { console.log('\x1b[32m%s\x1b[0m', message); }
 for (const testCase of testCases) {
     try {
         new RomanNumber(testCase.param);
-        if (testCase.error) {
-            stdoutRed(`Expected ${testCase.param} to throw '${testCase.error}'`);
-            continue;
-        }
+        stdoutRed(`Expected ${testCase.param} to throw '${testCase.error}'`);
     } catch (e) {
         if (e.message !== testCase.error) {
             stdoutRed(`Expected ${testCase.param} to throw '${testCase.error}' instead got '${e.message}'`);
