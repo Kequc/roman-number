@@ -14,7 +14,7 @@ const DICT = [
     { int: 1, rom: 'I' }
 ];
 
-const VALID_ROM = /^M{0,3}(?:CM|CD|D?C{0,3})(?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3})$/;
+const VALID_ROM = /^M{0,4}(?:CM|CD|D?C{0,3})(?:XC|XL|L?X{0,3})(?:IX|IV|V?I{0,3})$/;
 
 ////
 // UTIL
@@ -35,17 +35,15 @@ function toRoman (int) {
 }
 
 function getInt (param) {
-    const parsed = parseInt(param, 10);
+    let parsed = parseInt(param, 10);
+    if (!param && parsed !== 0) throw new Error('value required');
 
-    if (typeof parsed === 'number') {
-        if (parsed < 1 || parsed > 3999) throw new Error('invalid range');
-    }
-    if (!param) throw new Error('value required');
-
-    if (isNaN(parsed) && typeof param === 'string') {
+    if (isNaN(parsed)) {
         if (!VALID_ROM.test(param)) throw new Error('invalid value');
-        return fromRoman(param);
+        parsed = fromRoman(param);
     }
+
+    if (parsed < 1 || parsed > 3999) throw new Error('invalid range');
 
     return parsed;
 }
@@ -96,7 +94,7 @@ const testCases = [
     { param: 'error', error: 'invalid value' },
     { param: 'MCDLXXXII', int: 1482, rom: 'MCDLXXXII' },
     { param: 'MCMLXXX', int: 1980, rom: 'MCMLXXX' },
-    { param: 'MMMMCMXCIX', error: 'invalid value' },
+    { param: 'MMMMCMXCIX', error: 'invalid range' },
     { param: 'MMMMDMXCIX', error: 'invalid value' }
 ];
 
